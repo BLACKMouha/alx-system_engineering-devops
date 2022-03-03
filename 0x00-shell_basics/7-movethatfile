@@ -1,3 +1,2 @@
 #!/bin/bash
-touch /tmp/belly
 mv /tmp/belly /tmp/my_first_directory

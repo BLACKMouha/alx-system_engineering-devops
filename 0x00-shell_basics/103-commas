@@ -1,2 +1,2 @@
 #!/bin/bash
-ls .* [[:alnum:]]* -mud --indicator-style=slash
+ls -Fam --group-directories-first

@@ -1,2 +1,2 @@
 #!/bin/bash
-ls .* [[:alnum:]]* -ud --indicator-style=slash
+ls .* [[:alnum:]]* -mud --indicator-style=slash

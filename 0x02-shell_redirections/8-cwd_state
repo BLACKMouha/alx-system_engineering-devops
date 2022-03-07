@@ -1,0 +1,2 @@
+#!/bin/bash
+ls -la 2>&1 | tee ls_cwd_content

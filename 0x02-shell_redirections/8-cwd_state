@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -l >> ls_cwd_content | less ls_cwd_content
+ls -l >> ls_cwd_content | cat ls_cwd_content

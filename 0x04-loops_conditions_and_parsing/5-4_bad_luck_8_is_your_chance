@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Loops from 1 to 10 and:
+# +displays bad luck for the 4th loop iteration
+# +displays good luck for the 8th loop iteration
+# +displays Best School for the other iterations
+
+for (( i=0; i < 10; i++ ));
+do
+	if [ "$i" == 3 ]; then
+		echo "bad luck"
+		: i = $(( "$i" + 1 ))
+
+	elif [ "$i" == 7 ]; then
+		echo "good luck"
+		: i = $(( "$i" + 1 ))
+
+	else
+		echo "Best School"
+	fi
+done

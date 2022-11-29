@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Displays two strings, one of which 9 times and the
+# Displays two strings, one of which 9 times
 
 i=0
 while (( $(( i++ )) < 10 ));

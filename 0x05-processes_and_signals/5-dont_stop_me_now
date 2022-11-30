@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-# Displays "To infinity and beyond" indefinitely
+# Stops 4-to_infinity_and_beyond process.
 
 kill "$(ps -aux | pgrep -f 4-to_infinity_and_beyond)"

@@ -1,0 +1,2 @@
+# Using a private key to connect to SSH server
+ssh -i ~/.ssh/school ubuntu@52.6.122.206

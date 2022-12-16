@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Write a Bash script that transfers a file from our client to a server
+# Accept 4 parameters:
+#	the path of the file to be transferred
+#	the IP address of the server we want to transfer the file to
+#	the username `scp` connects with
+#	the path to the SSH private key that `scp` uses
+#
+# Displays 'Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY'
+# if less than 3 parameters passed.
+#
+# `scp` must transfer the file to the user home directory ~/
+# Strict host key checking must be disabled when using `scp`
+
+fname=$1
+ip_add=$2
+uname=$3
+pv_key=$4
+
+scp -i "$pv_key" "$fname" "$uname@$ip_add:~/"

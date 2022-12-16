@@ -12,9 +12,14 @@
 # `scp` must transfer the file to the user home directory ~/
 # Strict host key checking must be disabled when using `scp`
 
-fname=$1
-ip_add=$2
-uname=$3
-pv_key=$4
+if [ "$#" -eq 4 ];
+then
+	fname=$1
+	ip_add=$2
+	uname=$3
+	pv_key=$4
 
-scp -i "$pv_key" "$fname" "$uname@$ip_add:~/"
+	scp -i "$pv_key" "$fname" "$uname"@"$ip_add":~/
+else
+	echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
+fi

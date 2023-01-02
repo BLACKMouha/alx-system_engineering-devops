@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# 
+# configuration of nginx
+
 sudo apt-get update -y
 sudo apt-get install curl -y
 sudo apt-get install nginx -y

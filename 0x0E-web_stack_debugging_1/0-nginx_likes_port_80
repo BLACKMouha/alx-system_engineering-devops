@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# 
+sudo apt-get update -y
+sudo apt upgrade -y
+sudo apt-get install curl -y
+sudo apt-get install nginx -y
+sudo apt install ufw -y
+sudo ufw allow 'Nginx HTTP'
+sudo service nginx restart

@@ -2,8 +2,6 @@
 # configuration of nginx
 
 sudo apt-get update -y
-sudo apt-get install curl -y
-sudo apt-get install nginx -y
+sudo apt-get install curl nginx ufw -y
 sudo service nginx restart
-sudo apt install ufw -y
 sudo ufw allow 'Nginx HTTP'

@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Configure Nginx so that it is possible to know what server returns
 # a response based on the hostname of the server.
 

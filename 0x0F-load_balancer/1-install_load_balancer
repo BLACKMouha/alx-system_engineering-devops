@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Script that configures HAproxy in a load balancer 
-FILE=$(which haproxy)
+FILE=$(haproxy -v)
 if [ ! -e "$FILE" ];
 then
 	sudo apt-get update -y
@@ -13,12 +13,12 @@ BACKEND="backend web_servers\n\tbalance roundrobin\n\tserver 28996-web-01 100.27
 CONFIG_FILE="/etc/haproxy/haproxy.cfg"
 if ! grep -qF "$FRONTEND" "$CONFIG_FILE";
 then
-	sudo echo -e "\n$FRONTEND" >> "$CONFIG_FILE"
+	echo -e "\n$FRONTEND" | sudo tee -a "$CONFIG_FILE"
 fi
 
 if ! grep -qF "$BACKEND" "$CONFIG_FILE";
 then
-	sudo echo -e "\n$BACKEND" >> "$CONFIG_FILE"
+	echo -e "\n$BACKEND" | sudo tee -a "$CONFIG_FILE"
 fi
 
 sudo service haproxy restart

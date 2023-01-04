@@ -11,7 +11,7 @@ FRONTEND="frontend http\n\tbind *:80\n\tmode http\n\tdefault_backend web_servers
 BACKEND="backend web_servers\n\tbalance roundrobin\n\tserver 28996-web-01 100.27.13.223:80 check\n\tserver 28996-web-02 100.24.240.49:80 check"
 
 CONFIG_FILE="/etc/haproxy/haproxy.cfg"
-if ! grep -qF "$FRONTEND" $CONFIG_FILE;
+if ! grep -qF "$FRONTEND" "$CONFIG_FILE";
 then
 	sudo echo -e "\n$FRONTEND" >> "$CONFIG_FILE"
 fi

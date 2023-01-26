@@ -7,4 +7,4 @@
 mysqldump -uroot -p "$1" --all-databases --master-data > backup.sql
 
 # Creating an archive, with backup, which format is current ``day-Month-Year.tar.gz``
-tar -czf "$(date '+%d%m%Y')".tar.gz backup.sql
+tar -czf "$(date '+%d-%m-%Y')".tar.gz backup.sql

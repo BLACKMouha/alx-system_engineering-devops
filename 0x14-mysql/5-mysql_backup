@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# MySQL backup
+# Usage: ./5-mysql_backup <PASSWORD>
+# Dumps all databases to backup.sql, appending the `CHANGE MASTER TO` statments required on the
+# replica to start the replication process.
+# (This script takes only the password, as argument, of the MySQL user used to dump the database server.)
+mysqldump -uroot -p "$1" --all-databases --master-data > backup.sql
+
+# Creating an archive, with backup, which format is current ``day-Month-Year.tar.gz``
+tar -czf "$(date '+%d%m%Y')".tar.gz backup.sql

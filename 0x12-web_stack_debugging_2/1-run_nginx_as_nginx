@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Fixing the docker container so that Nginx is runing as the nginx user at port 8080
+
+apt-get update && apt-get install -y lsof nginx 
+kill -9 "$(sudo lsof -t -i:80)"
+chmod 644 /etc/nginx/nginx.conf /etc/nginx/sites-enabled/default
+sed -i "s/^user .*;/user nginx;/" /etc/nginx/nginx.conf
+sed -Ei "s/(listen (\[::\]:)?80) /\180 /" /etc/nginx/sites-enabled/default
+su nginx -s /bin/bash -c 'service nginx restart'

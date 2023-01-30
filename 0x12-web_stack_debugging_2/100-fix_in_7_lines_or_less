@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Fixing the docker container so that Nginx is runing as the nginx user at port 8080
 pkill apache2
+chown nginx:nginx /etc/nginx/nginx.conf
 chmod 644 /etc/nginx/nginx.conf
-sed -i "s/^user .*/user nginx;/" /etc/nginx/nginx.conf
-sed -Ei 's/(listen (\[::\]:)?80) /\180 /' /etc/nginx/sites-enabled/default
+sed -i 's/80/8080 /g' /etc/nginx/sites-enabled/default
 su nginx -s /bin/bash -c 'service nginx restart'

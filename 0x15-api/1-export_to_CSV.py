@@ -28,7 +28,7 @@ if __name__ == '__main__':
         rows = []
         for todo in todos:
             rows.append({'id': '{}'.format(the_user['id']),
-                         'name': '{}'.format(the_user['name']),
+                         'name': '{}'.format(the_user['username']),
                          'completed': '{}'.format(todo['completed']),
                          'title': '{}'.format(todo['title'])
                          })

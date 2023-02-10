@@ -29,8 +29,7 @@ if __name__ == '__main__':
         for todo in todos:
             list_todos.append({'task': todo['title'],
                                'completed': todo['completed'],
-                               'username': the_user['username']}
-                               )
+                               'username': the_user['username']})
         dict_todos_user[userId] = list_todos
         with open('{}.json'.format(userId), 'w') as f:
             json.dump(dict_todos_user, f)

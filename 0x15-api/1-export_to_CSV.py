@@ -28,10 +28,10 @@ if __name__ == '__main__':
         rows = []
         for todo in todos:
             rows.append({'id': '{}'.format(the_user['id']),
-                'name': '{}'.format(the_user['name']),
-                'completed': '{}'.format(todo['completed']),
-                'title': '{}'.format(todo['title'])
-                })
+                         'name': '{}'.format(the_user['name']),
+                         'completed': '{}'.format(todo['completed']),
+                         'title': '{}'.format(todo['title'])
+                         })
 
         with open('{}.csv'.format(userId), 'w') as f:
             writer = csv.DictWriter(f,

@@ -3,8 +3,8 @@
 
 
 if __name__ == '__main__':
-    from sys import argv
     import requests
+    from sys import argv
 
     try:
         '''Argument passed to the program'''

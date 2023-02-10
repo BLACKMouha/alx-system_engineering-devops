@@ -38,7 +38,6 @@ if __name__ == '__main__':
                                     fieldnames=fieldnames,
                                     quotechar='"',
                                     quoting=csv.QUOTE_ALL)
-            writer.writeheader()
             writer.writerows(rows)
 
     except Exception:

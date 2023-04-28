@@ -54,7 +54,6 @@ str="server_name _;\n\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n
 
 sed -i "s/server_name _;/$str/" /etc/nginx/sites-available/my_wesite
 
-
 # Apply configuration and restart nginx
 nginx -t
 service nginx restart

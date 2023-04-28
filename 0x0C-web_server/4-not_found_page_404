@@ -48,7 +48,7 @@ str="server_name _;\n\n\tlocation \/redirect_me {\n\t\treturn 301 https:\/\/www.
 sed -i "s/server_name _;/$str/" /etc/nginx/sites-available/my_website
 
 # Configure a custom 404 page
-echo "Ceci n'est pas une page" > /var/www/my_website/404.html
+echo -e "Ceci n'est pas une page\n" > /var/www/my_website/404.html
 
 str="server_name _;\n\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\tinternal;\n\t\troot \/var\/www\/my_website;\n\t}"
 

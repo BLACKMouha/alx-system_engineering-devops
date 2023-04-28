@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Setting up Nginx web server
+
+# Install Nginx
+apt-get update && apt-get install -y nginx
+
+# Configure Nginx for serving the content of our website
+content="server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        root /var/www/my_website;
+
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files \$uri \$uri/ =404;
+        }
+}"
+echo -e "$content" > /etc/nginx/sites-available/my_website
+
+# Unlink the default symlink if necessary before populating our configuration
+# file
+if [ -f /etc/nginx/sites-enabled/default ];
+then
+	unlink /etc/nginx/sites-enabled/default
+fi
+	ln -s /etc/nginx/sites-available/my_website /etc/nginx/sites-enabled/
+
+# Create the content of our website
+mkdir -p /var/www/my_website
+echo "Hello World!" > /var/www/my_website/index.html
+
+# Apply configuration and restart nginx
+nginx -t
+service nginx restart

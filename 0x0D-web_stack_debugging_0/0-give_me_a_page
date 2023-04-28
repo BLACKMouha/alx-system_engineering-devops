@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Debugging the holberton server
+apt-get update && apt-get install apache2 && service apache2 restart

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Debug Nginx of an Ubuntu 14.04 server
+kill "$(pidof nginx)"
+sed -i 's/http {/http {\n\tserver {\n\t\tlisten 80;\n\t}/' /etc/nginx/nginx.conf
+nginx -t
+service nginx start

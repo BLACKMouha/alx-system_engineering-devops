@@ -4,11 +4,6 @@ apt-get install --no-install-recommends software-properties-common
 add-apt-repository ppa:vbernat/haproxy-2.7
 apt-get install haproxy=2.7.\*
 
-ufw enable
-ufw allow ssh
-ufw allow http
-ufw allow https
-
 str="\nfrontend f_devactions\n\tbind *:80\n\tmode http\n\tdefault_backend b_devactions\n\nbackend b_devactions\n\tmode http\n\tbalance roundrobin\n\tserver 28996-web-01 54.90.9.157:80 check\n\tserver 28996-web-02 52.91.209.247:80 check"
 echo -e $str | sudo tee -a /etc/haproxy/haproxy.cfg
 

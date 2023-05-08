@@ -4,49 +4,20 @@
 # Install Nginx
 apt-get update && apt-get install -y nginx
 
-# Configure Nginx for serving the content of our website
-content="server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
+mkdir -p /var/www/devactions.tech/html
+chown -R ubuntu:ubuntu /var/www/devactions.tech/html
+chmod -R 755 /var/www/
+echo "Hello Wordl!" | tee /var/www/devactions.tech/html/index.html
+unlink /etc/nginx/sites-enabled/default
+cp /etc/nginx/sites-available/default /etc/nginx/sites-available/devactions.tech
+sed -i '/^\s*#/d' /etc/nginx/sites-available/devactions.tech
+sed -i "s/ default_server//g" /etc/nginx/sites-available/devactions.tech
+sed -i "s/www\/html/www\/devactions.tech\/html/g" /etc/nginx/sites-available/devactions.tech
 
-        root /var/www/my_website;
+str="server_name devactions.tech www.devactions.tech;\n\n\tlocation \/redirect_me {\n\t\treturn 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;\n\t}"
+sed -i "s/server_name _;/$str/" /etc/nginx/sites-available/devactions.tech
 
-        # Add index.php to the list if you are using PHP
-        index index.html index.htm index.nginx-debian.html;
+ln -s /etc/nginx/sites-available/devactions.tech  /etc/nginx/sites-enabled/
 
-        server_name _;
-
-        location / {
-                # First attempt to serve request as file, then
-                # as directory, then fall back to displaying a 404.
-                try_files \$uri \$uri/ =404;
-        }
-}"
-echo -e "$content" > /etc/nginx/sites-available/my_website
-
-# Unlink the default symlink if necessary before populating our configuration
-# file
-if [ -f /etc/nginx/sites-enabled/default ];
-then
-	unlink /etc/nginx/sites-enabled/default
-fi
-	ln -s /etc/nginx/sites-available/my_website /etc/nginx/sites-enabled/
-
-# Create the content of our website
-mkdir -p /var/www/my_website
-echo "Hello World!" > /var/www/my_website/index.html
-
-# Configure a "301 Moved Permanently" redirection on Nginx
-
-# When a user tries to get the page "example.com/redirect_me/",
-# he gets the page provided by the url specified
-# (in our script "https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4")
-# Setting up Nginx web server
-
-str="server_name _;\n\n\tlocation \/redirect_me {\n\t\treturn 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;\n\t}"
-
-sed -i "s/server_name _;/$str/" /etc/nginx/sites-available/my_website
-
-# Apply configuration and restart nginx
 nginx -t
 service nginx restart

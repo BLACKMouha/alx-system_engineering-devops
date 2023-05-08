@@ -18,7 +18,7 @@ str="server_name devactions.tech www.devactions.tech;\n\n\tlocation \/redirect_m
 sed -i "s/server_name _;/$str/" /etc/nginx/sites-available/devactions.tech
 
 # Configure a custom 404
-echo -e "Ceci n'est pas une page\n" > /var/www/devactions.tech/html/404.html
+echo -e "Ceci n'est pas une page" > /var/www/devactions.tech/html/404.html
 
 str="server_name devactions.tech www.devactions.tech;\n\n\terror_page 404 \/404.html;\n\n\tlocation = \/404.html {\n\t\tinternal;\n\t\troot \/var\/www\/devactions.tech\/html;\n\t}"
 

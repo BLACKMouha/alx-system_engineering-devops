@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Displays informations about subdomains
+if [ -z "$1" ]; then
+	echo "No arguments"
+elif [ -z "$2" ]; then
+	subs=("www" "lb-01" "web-01" "web-02")
+	for sub in "${subs[@]}"; do
+		dig "$sub.$1" | grep -A1 'ANSWER SECTION:' | awk 'NR > 1 { split($0, line, " "); split(line[1], url, "."); print ("The subdomain " url[1] " is a A record and points to " line[5]) }'
+	done
+else
+	dig "$2.$1" | grep -A1 'ANSWER SECTION:' | awk 'NR > 1 { split($0, line, " "); split(line[1], url, "."); print ("The subdomain " url[1] " is a A record and points to " line[5]) }'
+fi

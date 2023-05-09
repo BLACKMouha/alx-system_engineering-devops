@@ -7,7 +7,7 @@ apt-get update && apt-get install -y nginx
 mkdir -p /var/www/devactions.tech/html
 chown -R ubuntu:ubuntu /var/www/devactions.tech/html
 chmod -R 755 /var/www/
-echo "Hello Wordl!" | tee /var/www/devactions.tech/html/index.html
+echo "Hello World!" | tee /var/www/devactions.tech/html/index.html
 
 unlink /etc/nginx/sites-enabled/default
 cp /etc/nginx/sites-available/default /etc/nginx/sites-available/devactions.tech

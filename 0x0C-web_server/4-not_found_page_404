@@ -3,6 +3,7 @@
 
 # Install Nginx
 apt-get update && apt-get install -y nginx
+ufw allow 'Nginx HTTP'
 echo "Hello Wordl!" | tee /var/www/html/index.html
 echo -e "Ceci n'est pas une page\n" > /var/www/html/custom_404.html
 str="server_name _;\n\n\tlocation \/redirect_me {\n\t\treturn 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;\n\t}\n\n\terror_page 404 \/custom_404.html;\n\n\tlocation = \/custom_404.html {\n\t\tinternal;\n\t\troot \/var\/www\/html;\n\t}"

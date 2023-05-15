@@ -4,26 +4,17 @@
 # Install Nginx
 apt-get update && apt-get install -y nginx
 
-mkdir -p /var/www/devactions.tech/html
-chown -R ubuntu:ubuntu /var/www/devactions.tech/html
-chmod -R 755 /var/www/
-echo "Hello Wordl!" | tee /var/www/devactions.tech/html/index.html
-unlink /etc/nginx/sites-enabled/default
-cp /etc/nginx/sites-available/default /etc/nginx/sites-available/devactions.tech
-sed -i '/^\s*#/d' /etc/nginx/sites-available/devactions.tech
-sed -i "s/ default_server//g" /etc/nginx/sites-available/devactions.tech
-sed -i "s/www\/html/www\/devactions.tech\/html/g" /etc/nginx/sites-available/devactions.tech
+echo "Hello Wordl!" | tee /var/www/html/index.html
 
-str="server_name devactions.tech www.devactions.tech;\n\n\tlocation \/redirect_me {\n\t\treturn 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;\n\t}"
-sed -i "s/server_name _;/$str/" /etc/nginx/sites-available/devactions.tech
+str="server_name _;\n\n\tlocation \/redirect_me {\n\t\treturn 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;\n\t}"
+sed -i "s/server_name _;/$str/" /etc/nginx/sites-available/default
 
 # Configure a custom 404
-echo -e "Ceci n'est pas une page" > /var/www/devactions.tech/html/404.html
+echo -e "Ceci n'est pas une page\n" > /var/www/html/custom_404.html
 
-str="server_name devactions.tech www.devactions.tech;\n\n\terror_page 404 \/404.html;\n\n\tlocation = \/404.html {\n\t\tinternal;\n\t\troot \/var\/www\/devactions.tech\/html;\n\t}"
+str="server_name _;\n\n\terror_page 404 \/custom_404.html;\n\n\tlocation = \/404.html {\n\t\tinternal;\n\t\troot \/var\/www\/html;\n\t}"
 
-sed -i "s/server_name devactions.tech www.devactions.tech;/$str/" /etc/nginx/sites-available/devactions.tech
-ln -s /etc/nginx/sites-available/devactions.tech  /etc/nginx/sites-enabled/
+sed -i "s/server_name _;/$str/" /etc/nginx/sites-available/default
 
 nginx -t
 service nginx restart

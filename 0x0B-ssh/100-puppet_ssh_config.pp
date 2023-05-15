@@ -1,3 +1,4 @@
+# Puppet script that configures SSH client using school private key so that authentication does not require typing password
 $conf_stmt = "
     PasswordAuthentication no
     IdentityFile ~/.ssh/school

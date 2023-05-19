@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Nginx is running by 'nginx' user on port '8080' which was previously used by Apache
+chmod 644 /etc/nginx/nginx.conf
+sed -i "s/# user www-data/user nginx/" /etc/nginx/nginx.conf
+sed -i "s/80/8080/g" /etc/nginx/sites-available/default
+kill -9 "$(pidof apache2)"
+sudo -u nginx /bin/bash -c "service nginx restart"

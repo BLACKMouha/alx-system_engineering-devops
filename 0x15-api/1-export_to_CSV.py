@@ -7,7 +7,6 @@ from sys import argv
 if __name__ == '__main__':
 
     if len(argv) == 2:
-
         try:
             q = int(argv[1])
         except Exception as e:
@@ -20,19 +19,17 @@ if __name__ == '__main__':
         u = 'https://jsonplaceholder.typicode.com/todos/'
         r = requests.get(u)
         d = []
-        td = 0
         for k in r.json():
-            i = []
+            i = {}
             if q == k.get('userId', None):
-                i.append(k.get('userId', None))
-                i.append(n)
-                i.append(k.get('completed', None))
-                i.append(k.get('title', None))
-            d.append(i)
-            if k.get('userId') > q:
-                break
+                i.update({
+                    "USER_ID": k.get('userId', None),
+                    "USERNAME": n,
+                    "TASK_COMPLETED_STATUS": k.get('completed', None),
+                    "TASK_TITLE": k.get('title', None)
+                    })
+                d.append(i)
 
         with open('{}.csv'.format(q), 'w', newline='') as f:
-            csv_writer = csv.writer(f, quoting=csv.QUOTE_ALL)
-            csv_writer.writerow(h)
+            csv_writer = csv.DictWriter(f, fieldnames=h, quoting=csv.QUOTE_ALL)
             csv_writer.writerows(d)

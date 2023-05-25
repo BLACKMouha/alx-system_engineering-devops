@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 '''0-gather_data_from_an_API module'''
-from sys import argv
 import json
 import requests
+from sys import argv
 
 if __name__ == '__main__':
 

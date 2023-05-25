@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 '''0-gather_data_from_an_API module'''
+from sys import argv
+import json
+import requests
 
 if __name__ == '__main__':
-    from sys import argv
+
     if len(argv) == 2:
-        import json
-        import requests
 
         try:
             q = int(argv[1])

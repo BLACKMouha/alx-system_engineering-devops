@@ -12,10 +12,13 @@ def top_ten(subreddit):
         print(None)
         return
     req = "https://www.reddit.com/r/{}.json".format(subreddit)
-    res = requests.get(req, all_redirects=False)
-    if (str(res.status_code)[0] != '2'):
+    res = requests.get(req, allow_redirects=False)
+    if str(res.status_code)[0] == '4':
         print(None)
         return
     first_ten_posts = list(islice(res.json()['data']['children'], 10))
-    for k in sorted(first_ten_posts):
-        print(k['data']['title'])
+    titles = []
+    for k in first_ten_posts:
+        titles.append(k['data']['title'])
+    for title in sorted(titles):
+        print(title)

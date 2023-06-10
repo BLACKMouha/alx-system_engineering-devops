@@ -12,7 +12,10 @@ def top_ten(subreddit):
         print(None)
         return
     req = "https://www.reddit.com/r/{}.json".format(subreddit)
-    res = requests.get(req, allow_redirects=False)
+    v = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101"
+    v += "Firefox/15.0.1"
+    h = {'User-agent': v}
+    res = requests.get(req, headers=h, allow_redirects=False)
     if str(res.status_code)[0] == '4':
         print(None)
         return

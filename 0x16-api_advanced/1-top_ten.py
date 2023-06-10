@@ -23,5 +23,5 @@ def top_ten(subreddit):
     titles = []
     for k in first_ten_posts:
         titles.append(k['data']['title'])
-    for title in sorted(titles):
+    for title in titles:
         print(title)

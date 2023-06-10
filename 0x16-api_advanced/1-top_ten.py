@@ -16,12 +16,13 @@ def top_ten(subreddit):
     v += "Firefox/15.0.1"
     h = {'User-agent': v}
     res = requests.get(req, headers=h, allow_redirects=False)
-    if str(res.status_code)[0] == '4':
+    if res.status_code == '200':
+        first_ten_posts = list(islice(res.json()['data']['children'], 10))
+        titles = []
+        for k in first_ten_posts:
+            titles.append(k['data']['title'])
+        for title in titles.sort():
+            print(title)
+    else:
         print(None)
         return
-    first_ten_posts = list(islice(res.json()['data']['children'], 10))
-    titles = []
-    for k in first_ten_posts:
-        titles.append(k['data']['title'])
-    for title in titles:
-        print(title)

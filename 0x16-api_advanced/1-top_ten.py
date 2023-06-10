@@ -18,6 +18,9 @@ def top_ten(subreddit):
     res = requests.get(req, headers=h, allow_redirects=False)
     if res.status_code == '200':
         first_ten_posts = list(islice(res.json()['data']['children'], 10))
+        if (irst_ten_posts is None):
+            print(None)
+            return
         titles = []
         for k in first_ten_posts:
             titles.append(k['data']['title'])

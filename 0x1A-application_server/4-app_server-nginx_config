@@ -1,0 +1,53 @@
+upstream hbnb_app_server {
+    server 127.0.0.1:5000 fail_timeout=0;
+    server 127.0.0.1:5001 fail_timeout=0;
+    server 127.0.0.1:5002 fail_timeout=0;
+    server 54.146.77.72:5000 fail_timeout=0;
+    server 54.146.77.72:5001 fail_timeout=0;
+    server 54.146.77.72:5002 fail_timeout=0;
+}
+
+server {
+	listen 80;
+
+	server_name 54.146.77.72;
+	server_name 127.0.0.1;
+
+	add_header X-Served-By "28996-web-01";
+
+	location /airbnb-onepage/ {
+		proxy_set_header X-Served-By "28996-web-01";
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header Host $http_host;
+		proxy_redirect off;
+
+		if (!-f $request_filename) {
+			proxy_pass http://hbnb_app_server;
+			break;
+		}
+	}
+
+	location /airbnb-dynamic/number_odd_or_even/ {
+		rewrite ^/airbnb-dynamic/number_odd_or_even/(.*)$ /number_odd_or_even/$1 break;
+
+		proxy_pass http://hbnb_app_server;
+
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header Host $http_host;
+		proxy_set_header X-Real-IP $remote_addr;
+
+		proxy_redirect off;
+	}
+
+	location /api/v1/ {
+		rewrite ^/api/v1/(.*)$ /api/v1/$1 break;
+
+		proxy_pass http://hbnb_app_server;
+
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header Host $http_host;
+		proxy_set_header X-Real-IP $remote_addr;
+
+		proxy_redirect off;
+	}
+}

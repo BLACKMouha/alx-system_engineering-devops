@@ -1,0 +1,22 @@
+upstream hbnb_app_server {
+    server localhost:5000 fail_timeout=0;
+    server localhost:5001 fail_timeout=0;
+}
+
+server {
+	listen 80;
+
+	server_name 54.146.77.72;
+	server_name 127.0.0.1;
+
+	location /airbnb-onepage/ {
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header Host $http_host;
+		proxy_redirect off;
+
+		if (!-f $request_filename) {
+			proxy_pass http://hbnb_app_server;
+			break;
+		}
+	}
+}

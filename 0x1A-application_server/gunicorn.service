@@ -2,7 +2,6 @@
 Description=Gunicorn instance that serves AirBnB_clone_v4
 After=network-online.target
 Requires=nginx.service
-Requires=hbnb.service
 
 [Service]
 Type=simple

@@ -1,0 +1,27 @@
+[Unit]
+Description=Gunicorn instance that serves AirBnB_clone_v4
+After=network-online.target
+Requires=nginx.service
+Requires=hbnb.service
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+Environment="HBNB_MYSQL_USER=hbnb_dev"
+Environment="HBNB_MYSQL_PWD=hbnb_dev_pwd"
+Environment="HBNB_MYSQL_HOST=localhost"
+Environment="HBNB_MYSQL_DB=hbnb_dev_db"
+Environment="HBNB_TYPE_STORAGE=db"
+Environment="HBNB_API_PORT=5003"
+Restart=always
+RestartSec=3
+WorkingDirectory=/home/ubuntu/AirBnB_clone_v4
+ExecStart=/home/ubuntu/.local/bin/gunicorn --bind 0.0.0.0:5003 web_dynamic.2-hbnb:app
+RemainAfterExit=yes
+StandarOutput=file:/tmp/airbnb-access.log
+StandarddError=file:/tmp/airbnb-error.log
+SyslogIdentifier=gunicorn.service
+
+[Install]
+WantedBy=multi-user.target

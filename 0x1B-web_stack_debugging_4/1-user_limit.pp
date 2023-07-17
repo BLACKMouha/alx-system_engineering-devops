@@ -1,5 +1,6 @@
 # Puppet scripts that increases the limit of opened files in OS level
 
-exec { 'increase_os_worker_files'
-  command  => 'sudo /bin/sed -i "s/nofile 4/nofile 6000/g; s/nofile 5/nofile 6000/g" /etc/security/limits.conf'
+exec { 'increase_os_worker_files':
+  command => 'sudo sed -ie "$a\fs.file-max = 65536" /etc/sysctl.conf'
+  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
 }
